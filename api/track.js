@@ -84,6 +84,22 @@ export default async function handler(req, res) {
       }),
     });
 
+import { kv } from '@vercel/kv';
+
+const visit = {
+    ip,
+    location,
+    page,
+    referrer,
+    userAgent,
+    time: new Date().toISOString(),
+  };
+    await kv.lpush('visits', JSON.stringify(visit));
+    await kv.ltrim('visits', 0, 199);
+
+    await kv.hincrby('ip_counts', ip, 1);
+    await kv.hset('ip_locations', { [ip]: location });
+
     res.status(200).json({ ok: true });
   } catch (err) {
     console.error('track.js error:', err);
