@@ -1,13 +1,13 @@
-// Serverless-функция Vercel: /api/track
-// Принимает данные о визите от script.js и отправляет уведомление в Telegram.
-// ВАЖНО: токен бота и chat_id берутся из переменных окружения Vercel,
-// а не хранятся в коде — см. инструкцию в README_TELEGRAM.md
-
+const ALLOWED_ORIGIN = 'https://motosport-8ahd.vercel.app';
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'Method not allowed' });
     return;
   }
+  const origin = req.headers.origin || req.headers.referer || '';
+  if (!origin.startsWith(ALLOWED_ORIGIN)) {
+    res.status(403).json({ ok: false, error: 'Forbidden' });
+    return;
 
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
