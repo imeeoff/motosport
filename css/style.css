@@ -386,14 +386,18 @@ h1,h2,h3,h4{
   z-index:2;
   margin-top:70px;
   display:grid;
+  justify-items:center;
   grid-template-columns:repeat(4,1fr);
   border-top:1px solid var(--line-soft);
-  padding-top:34px;
+  padding-top:0px;
 }
 .stat{
   display:flex;
   flex-direction:column;
+  align-items:center;
+  text-align:center;
   gap:8px;
+  padding-top:34px;
   padding-right:20px;
   border-right:1px solid var(--line-soft);
 }
@@ -403,6 +407,7 @@ h1,h2,h3,h4{
   font-size:clamp(26px,3vw,40px);
   color:var(--text-primary);
   display:flex;
+  justify-items:center;
   align-items:baseline;
   gap:2px;
 }
@@ -413,6 +418,7 @@ h1,h2,h3,h4{
   letter-spacing:.08em;
   text-transform:uppercase;
   color:var(--text-tertiary);
+  text-align:center
 }
 
 /* =========================================================
