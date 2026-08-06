@@ -4,19 +4,38 @@
    переключатель цен (сутки/неделя), форма контактов
 ========================================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
+/* =========================================================
+   Учёт визитов (отправка в Telegram через /api/track)
+   Работает только при деплое на Vercel — на обычном Nginx
+   без серверной функции запрос просто не пройдёт и будет
+   тихо проигнорирован (сайт при этом не ломается).
+========================================================= */
+(function trackVisit() {
+  try {
+    const payload = JSON.stringify({
+      page: location.pathname.replace(/^\//, '') || 'index.html',
+      referrer: document.referrer || '',
+      lang: navigator.language || '',
+      screen: `${window.screen.width}x${window.screen.height}`,
+    });
 
-fetch("/api/visit", {
-  method:"POST",
-  headers:{
-    "Content-Type":"application/json"
-  },
-  body:JSON.stringify({
-    page:location.pathname,
-    browser:navigator.userAgent
-   })
- })
-.catch(console.error);
+    if (navigator.sendBeacon) {
+      const blob = new Blob([payload], { type: 'application/json' });
+      navigator.sendBeacon('/api/track', blob);
+    } else {
+      fetch('/api/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+      }).catch(() => {});
+    }
+  } catch (e) {
+    /* тихо игнорируем — трекинг не должен мешать работе сайта */
+  }
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Активная ссылка в меню ---------- */
   const currentPage = location.pathname.split('/').pop() || 'index.html';
@@ -268,4 +287,3 @@ fetch("/api/visit", {
   }
 
 });
-
