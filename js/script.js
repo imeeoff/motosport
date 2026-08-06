@@ -6,20 +6,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  fetch("http://:api/visit",{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-      page:location.pathname,
-      browser:navigator.userAgent
-      width:window.innerWidth,
-      height:window.innerHeight
-    })
-  })
-  .catch(console.error);
-
   /* ---------- Активная ссылка в меню ---------- */
   const currentPage = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
@@ -271,3 +257,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+fetch("/api/visit", {
+  method:"POST",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body:JSON.stringify({
+    page:location.pathname,
+    browser:navigator.userAgent
+   })
+ })
+.catch(console.error);
