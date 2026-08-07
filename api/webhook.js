@@ -40,7 +40,7 @@ async function sendLastVisits(BOT_TOKEN, chatId) {
   }
   let text = '📄 *Последние 5 визитов:*\n\n';
   visits.forEach((v, i) => {
-    const visit = JSON.parse(v);
+    const visit = typeof v === 'string' ? JSON.parse(v) : v;
     const date = new Date(visit.time).toLocaleString('ru-RU', {
       timeZone: 'Europe/Moscow',
     });
