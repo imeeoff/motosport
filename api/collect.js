@@ -63,14 +63,28 @@ export default async function handler(req, res) {
     });
 
     const text =
-      `🏍 *Новый визит на MotoSport*\n\n` +
-      `📄 Страница: \`${page}\`\n` +
+      `🏍 Новый визит на MotoSport\n\n` +
+      `📄 Страница: ${page}\n` +
       `🔗 Переход: ${referrer}\n` +
       `🌍 Локация: ${location}\n` +
-      `📍 IP: \`${ip}\`\n` +
+      `📍 IP: ${ip}\n` +
       `💻 Устройство: ${userAgent}\n` +
       `🌐 Язык: ${lang} · Экран: ${screen}\n` +
       `🕒 Время (МСК): ${time}`;
+
+     const tgResp = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text,
+        disable_web_page_preview: true,
+      }),
+    });
+   if (!tgResp.ok) {
+      const errText = await tgResp.text();
+      console.error('Telegram sendMessage error:', tgResp.status, errText);
+}
 
     await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
