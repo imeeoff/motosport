@@ -86,17 +86,6 @@ export default async function handler(req, res) {
       console.error('Telegram sendMessage error:', tgResp.status, errText);
 }
 
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text,
-        parse_mode: 'Markdown',
-        disable_web_page_preview: true,
-      }),
-    });
-
     const visit = {
       ip,
       location,
