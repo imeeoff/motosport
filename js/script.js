@@ -21,9 +21,9 @@
 
     if (navigator.sendBeacon) {
       const blob = new Blob([payload], { type: 'application/json' });
-      navigator.sendBeacon('/api/track', blob);
+      navigator.sendBeacon('/api/collect', blob);
     } else {
-      fetch('/api/track', {
+      fetch('/api/collect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: payload,
