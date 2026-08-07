@@ -14,8 +14,12 @@ export default async function handler(req, res) {
 
     if (text === '/start') {
       await sendMsg(BOT_TOKEN, chatId,
-        'Привет! 🏍 Это бот MotoSport.\n\n' +
-        'Доступные команды вы можете посмотреть по кнопке "Меню" ниже.\n'
+        'Привет!\n' + 
+        '🏍 Это команда MotoSport.\n' +
+        'Рады видеть тебя в Telegram Bot "MotoSport Monitoring"\n\n' +
+        'Доступные команды:\n' +
+        '/last - Показывает последних 5 пользователей заходвших на сайт\n' +
+        '/topip - Показывает IP наиболее часто заходивших на сайт'
       );
     } else if (text === '/last') {
       await sendLastVisits(BOT_TOKEN, chatId);
