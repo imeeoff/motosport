@@ -447,7 +447,15 @@ h1,h2,h3,h4{
   color:var(--text-tertiary);
   margin-bottom:22px;
 }
-.breadcrumb .accent{ color:var(--accent); }
+.breadcrumb .accent{ color:var(--accent); 
+}
+.breadcrumb a{
+  color:var(--text-tertiary);
+  transition:color .3s;
+}
+.breadcrumb a:hover{
+  color:var(--accent);
+}
 
 /* =========================================================
    ТАХОМЕТРЫ (signature-элемент — статистика в стиле приборной панели)
