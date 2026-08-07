@@ -977,8 +977,10 @@ h1,h2,h3,h4{
   .burger{ display:flex; }
   .hero .container{ grid-template-columns:1fr; }
   .hero-visual{ order:-1; }
-  .hero-stats{ grid-template-columns:repeat(2,1fr); row-gap:26px; }
+  .hero-stats{ grid-template-columns:repeat(2,1fr); row-gap:0; }
+  .stat{ padding-bottom:34px; }
   .stat:nth-child(2n){ border-right:none; }
+  .stat:nth-child(-n+2){ border-bottom:1px solid var(--line-soft); }
   .split, .split.reverse{ grid-template-columns:1fr; }
   .split.reverse .split-media{ order:0; }
   .contact-grid{ grid-template-columns:1fr; }
