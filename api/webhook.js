@@ -15,9 +15,7 @@ export default async function handler(req, res) {
     if (text === '/start') {
       await sendMsg(BOT_TOKEN, chatId,
         'Привет! 🏍 Это бот MotoSport.\n\n' +
-        'Доступные команды:\n' +
-        '/last — последние 5 заходов\n' +
-        '/topip — топ IP по количеству визитов'
+        'Доступные команды вы можете посмотреть по кнопке "Меню" ниже.\n'
       );
     } else if (text === '/last') {
       await sendLastVisits(BOT_TOKEN, chatId);
